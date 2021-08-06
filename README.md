@@ -67,12 +67,20 @@ Supported field types
 
 Currently, library supports limited fields:
 
-- int
 - string
 - bool
-- unit
-- float32
-- float64
+- int, base 10
+- int8, base 10
+- int16, base 10
+- int32, base 10
+- int64, base 10
+- unit, base 10
+- unit8, base 10
+- unit16, base 10
+- unit32, base 10
+- unit64, base 10
+- float32, delimiter is point, comma will be ignored
+- float64, delimiter is point, comma will be ignored
 - complex64
 - complex128
 
