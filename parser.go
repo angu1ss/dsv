@@ -16,7 +16,7 @@ type Parser struct {
 	Reader     *csv.Reader
 	Data       interface{}
 	ref        reflect.Value
-	indices    []int // indices is field index list of header array
+	indices    []int // indices are field index list of header array
 	structMode bool
 	normalize  norm.Form
 }
@@ -169,11 +169,91 @@ func (p *Parser) Next() (eof bool, err error) {
 				}
 				field.SetInt(col)
 			}
+		case reflect.Int8:
+			if record == "" {
+				field.SetInt(0)
+			} else {
+				col, err := strconv.ParseInt(record, 10, 8)
+				if err != nil {
+					return false, err
+				}
+				field.SetInt(col)
+			}
+		case reflect.Int16:
+			if record == "" {
+				field.SetInt(0)
+			} else {
+				col, err := strconv.ParseInt(record, 10, 16)
+				if err != nil {
+					return false, err
+				}
+				field.SetInt(col)
+			}
+		case reflect.Int32:
+			if record == "" {
+				field.SetInt(0)
+			} else {
+				col, err := strconv.ParseInt(record, 10, 32)
+				if err != nil {
+					return false, err
+				}
+				field.SetInt(col)
+			}
+		case reflect.Int64:
+			if record == "" {
+				field.SetInt(0)
+			} else {
+				col, err := strconv.ParseInt(record, 10, 64)
+				if err != nil {
+					return false, err
+				}
+				field.SetInt(col)
+			}
 		case reflect.Uint:
 			if record == "" {
 				field.SetUint(0)
 			} else {
 				col, err := strconv.ParseUint(record, 10, 0)
+				if err != nil {
+					return false, err
+				}
+				field.SetUint(col)
+			}
+		case reflect.Uint8:
+			if record == "" {
+				field.SetUint(0)
+			} else {
+				col, err := strconv.ParseUint(record, 10, 8)
+				if err != nil {
+					return false, err
+				}
+				field.SetUint(col)
+			}
+		case reflect.Uint16:
+			if record == "" {
+				field.SetUint(0)
+			} else {
+				col, err := strconv.ParseUint(record, 10, 16)
+				if err != nil {
+					return false, err
+				}
+				field.SetUint(col)
+			}
+		case reflect.Uint32:
+			if record == "" {
+				field.SetUint(0)
+			} else {
+				col, err := strconv.ParseUint(record, 10, 32)
+				if err != nil {
+					return false, err
+				}
+				field.SetUint(col)
+			}
+		case reflect.Uint64:
+			if record == "" {
+				field.SetUint(0)
+			} else {
+				col, err := strconv.ParseUint(record, 10, 64)
 				if err != nil {
 					return false, err
 				}
@@ -202,6 +282,26 @@ func (p *Parser) Next() (eof bool, err error) {
 					return false, err
 				}
 				field.SetFloat(col)
+			}
+		case reflect.Complex64:
+			if record == "" {
+				field.SetComplex(0)
+			} else {
+				col, err := strconv.ParseComplex(record, 64)
+				if err != nil {
+					return false, err
+				}
+				field.SetComplex(col)
+			}
+		case reflect.Complex128:
+			if record == "" {
+				field.SetComplex(0)
+			} else {
+				col, err := strconv.ParseComplex(record, 128)
+				if err != nil {
+					return false, err
+				}
+				field.SetComplex(col)
 			}
 		default:
 			return false, errors.New("unsupported field type: " + field.Type().String())
