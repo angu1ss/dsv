@@ -1,4 +1,3 @@
-[comment]: <> (This version is created for AppMagic)
 DSV parser for Go
 ====
 
